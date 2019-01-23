@@ -31,22 +31,22 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     describe 'when created failed' do
-        before do
-            @invalid_user_attributes = {password: '123456', password_confirmation: '123456'}
-            post :create, params: { user: @invalid_user_attributes }
-        end
+      before do
+        @invalid_user_attributes = { password: '123456', password_confirmation: '123456' }
+        post :create, params: { user: @invalid_user_attributes }
+      end
 
-        it { should respond_with 422 } 
+      it { should respond_with 422 }
 
-        it 'render errors json ' do
-          json_response = JSON.parse response.body, symbolize_names: true
-          expect(json_response).to have_key(:errors)
-        end
+      it 'render errors json ' do
+        json_response = JSON.parse response.body, symbolize_names: true
+        expect(json_response).to have_key(:errors)
+      end
 
-        it 'render errors json with detail message' do
-          json_response = JSON.parse response.body, symbolize_names: true
-          expect(json_response[:errors][:email]).to include("can't be blank")
-        end
+      it 'render errors json with detail message' do
+        json_response = JSON.parse response.body, symbolize_names: true
+        expect(json_response[:errors][:email]).to include("can't be blank")
+      end
     end
   end
 end
