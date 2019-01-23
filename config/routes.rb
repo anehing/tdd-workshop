@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   # get 'home/index'
-  namespace :api, default: { format: :json } do
+  namespace :api, defaults: { format: :json } do
     scope module: :v1 do
-
+      resources :users, only: [:show]
     end
   end
   # Ex:- :default =>''
