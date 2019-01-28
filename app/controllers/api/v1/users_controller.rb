@@ -13,9 +13,26 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-    private
+  def update
+    user = User.find_by(id: params[:id])
+    user.update(user_params)
+    if user.save
+      render json: user, status: 200
+    else
+      render json: { errors: user.errors }, status: 422
+    end
+  end
 
-      def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
-      end
+  def destroy
+    user = User.find_by(id: params[:id])
+    render(json: { errors: 'Not found' }, status: 404) && return if user.blank?
+    user.destroy
+    render json: { result: 'success' }, status: 200
+  end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
+    end
 end
