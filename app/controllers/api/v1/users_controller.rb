@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     render(json: { errors: 'Not found' }, status: 404) && return if user.blank?
     user.destroy
-    render json: { result: 'success' }, status: 200
+    render json: { result: 'success' }, status: 204
   end
 
   private

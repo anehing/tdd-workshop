@@ -95,7 +95,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           delete :destroy, params: { id: @user.id }
         end
 
-      it { should respond_with 200 }
+      it { should respond_with 204 }
 
       it "returns the result just destroy" do
         json_response = JSON.parse response.body, symbolize_names: true
