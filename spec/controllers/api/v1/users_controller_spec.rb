@@ -54,6 +54,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when update successfully" do
       before :each do
           @user = create :user
+          request.headers['Authoriziation'] = @user.auth_token
           @user_attributes = attributes_for :user
           @user_attributes[:email] = 'update@email.com'
           put :update, params: { id: @user.id, user: @user_attributes }
