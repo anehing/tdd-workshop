@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
   it { should respond_to(:password) }
 
   it { should respond_to(:password_confirmation) }
-  it { should respond_to(:auth_token) } 
+  it { should respond_to(:auth_token) }
 
   it { should be_valid }
 
@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
     it 'generate a unique token' do
       allow(Devise).to receive(:friendly_token).and_return("uniquetoken123")
       @user.generate_authentication_token!
-      expect(@user.auth_token).to eq 'uniquetoken123'  
+      expect(@user.auth_token).to eq 'uniquetoken123'
     end
 
     it 'generate another token when one already has been taken' do
